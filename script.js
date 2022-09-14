@@ -26,7 +26,8 @@ const typeController = (e) => {
   // Handle backspace press
   if (newLetter == "Backspace") {
     userText = userText.slice(0, userText.length - 1);
-    return display.removeChild(display.lastChild);
+
+    return display.lastChild ? display.removeChild(display.lastChild) : console.warn('No Child Node Found');
   }
 
   // these are the valid character we are allowing to type
@@ -132,7 +133,7 @@ displayHistory();
 // Show typing time spent
 setInterval(() => {
   const currentTime = new Date().getTime();
-  const timeSpent = (currentTime - startTime) / 1000;
+  const timeSpent = parseInt((currentTime - startTime) / 1000);
 
 
   document.getElementById("show-time").innerHTML = `${startTime ? timeSpent : 0} seconds`;
